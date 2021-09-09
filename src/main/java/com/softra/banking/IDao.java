@@ -15,6 +15,4 @@ public interface IDao<T> {
 	public Optional<T> findById(int id);
 	public T save(T entity);
 	public T deleteById(int id);
-	
-	//// from louis
 }

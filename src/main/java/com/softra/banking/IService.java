@@ -23,4 +23,5 @@ public interface IService<T> {
    public T save(T entity);
 
    public T deleteById(int id);
+   
 }

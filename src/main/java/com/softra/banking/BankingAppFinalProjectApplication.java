@@ -17,10 +17,10 @@ public class BankingAppFinalProjectApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(BankingAppFinalProjectApplication.class, args);
-		RestTemplate template = context.getBean("resttemplate", RestTemplate.class);
-		
-		String result = consumeGetRestApis(template);
-		System.out.println("response received after invoking get");
+//		RestTemplate template = context.getBean("resttemplate", RestTemplate.class);
+//		
+//		String result = consumeGetRestApis(template);
+//		System.out.println("response received after invoking get");
 	}
 	
 	public static String consumeGetRestApis(RestTemplate resttemplate) {
