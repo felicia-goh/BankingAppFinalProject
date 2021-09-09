@@ -32,6 +32,7 @@ public class User {
 		super();
 		this.id = id;
 		this.login_password = login_password;
+		System.out.println("hi");
 	}
 
 	public User(String login_password, String secret_question, String transaction_password) {
