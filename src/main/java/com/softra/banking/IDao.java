@@ -17,4 +17,5 @@ public interface IDao<T> {
 	public T deleteById(int id);
 	
 	//// from louis
+
 }
