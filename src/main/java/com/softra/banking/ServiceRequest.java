@@ -1,7 +1,6 @@
 package com.softra.banking;
 
 import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +9,7 @@ import javax.persistence.Id;
 
 @Entity(name="service_tracker")
 public class ServiceRequest {
-	
+		
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -18,7 +17,7 @@ public class ServiceRequest {
 	private String description;
 	
 	private int acctId;
-	
+
 	private Date raisedDate;
 	
 	private String status;
@@ -67,19 +66,33 @@ public class ServiceRequest {
 		this.status = status;
 	}
 
-	public ServiceRequest(int id, String description, int acctId, Date raisedDate) {
+	public ServiceRequest(int id, String description, int acctId, Date raisedDate, String status) {
 		super();
 		this.id = id;
 		this.description = description;
 		this.acctId = acctId;
 		this.raisedDate = raisedDate;
-		this.status = "pending";
+		this.status = status;
 	}
 	
+	public ServiceRequest(int id) {
+		this.id = id;
+	}
 	
-	
-	
-	
+	public ServiceRequest(String description, int acctId, Date raisedDate, String status) {
+
+		this.description = description;
+		this.acctId = acctId;
+		this.raisedDate = raisedDate;
+		this.status = status;
+	}
+
+		
+	@Override
+	public String toString() {
+		return "ServiceRequest [id=" + id + ", description=" + description + ", acctId=" + acctId + ", raisedDate="
+				+ raisedDate + ", status=" + status + "]";
+	}
 	
 
 }

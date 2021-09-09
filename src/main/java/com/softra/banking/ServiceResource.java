@@ -30,14 +30,12 @@ public class ServiceResource  {
   
   // return status of the service request
   @GetMapping("/users/{request_id}/services")
-  public String retrieveServiceRequest(@PathVariable int id) {
+  public String retrieveServiceRequest(@PathVariable("request_id") int id) {
 	  System.out.println("ServiceResource.retrieveServiceRequest()");
 	  
 	  ServiceRequest request = service.findById(id);
-	  if (request == null) {
-		  return null;
-	  }
-	  return request.getStatus();
+	  return request == null ? null : request.getStatus();
+
   }
  
 }
