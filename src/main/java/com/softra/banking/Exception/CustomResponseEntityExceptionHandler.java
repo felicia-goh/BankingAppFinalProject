@@ -23,9 +23,9 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 		return new ResponseEntity(cer,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@ExceptionHandler(CustomerNotFoundException.class)
-	public final ResponseEntity<Object> handleUserNotFoundException(CustomerNotFoundException ex, WebRequest req) {
-		CustomExceptionResponse cer = new CustomExceptionResponse(new Date(), "User not found", ex.getMessage());
+	@ExceptionHandler(AccountNotFoundException.class)
+	public final ResponseEntity<Object> handleUserNotFoundException(AccountNotFoundException ex, WebRequest req) {
+		CustomExceptionResponse cer = new CustomExceptionResponse(new Date(), "Account not found", ex.getMessage());
 		return new ResponseEntity(cer,HttpStatus.NOT_FOUND);
 	}
 

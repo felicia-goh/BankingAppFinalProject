@@ -24,11 +24,10 @@ public class Payee {
 		super();
 	}
 
-	public Payee(int payee_account_id, String nickname, Account account) {
+	public Payee(int payee_account_id, String nickname) {
 		super();
 		this.payee_account_id = payee_account_id;
 		this.nickname = nickname;
-		this.account = account;
 	}
 	
 	public int getPayee_account_id() {

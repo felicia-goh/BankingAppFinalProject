@@ -5,7 +5,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.softra.banking.Exception.AccountNotFoundException;
+
+@RestController
 public class PayeeResource {
 	
 	@Autowired
@@ -19,7 +23,7 @@ public class PayeeResource {
 	}
 	
 	@PostMapping(path = "/accounts/{account_id}/payees/new")
-	public Payee save(@PathVariable(value = "account_id") int account_id, @RequestBody Payee payee) {
+	public Payee save(@PathVariable(value = "account_id") int account_id, @RequestBody Payee payee) throws AccountNotFoundException {
 		
 		Account acc = accountService.findById(account_id);
 		Account payeeAcc = accountService.findById(payee.getPayee_account_id());
@@ -31,9 +35,9 @@ public class PayeeResource {
 			
 		} else {
 			if (acc.getId() == 0) {
-				System.out.println("Cannot find Account with id = " + account_id);
+				throw new AccountNotFoundException("Cannot find account with id = " + account_id);
 			} else if (payeeAcc.getId() == 0) {
-				System.out.println("Cannot find Account with id = " + account_id + ", payee's account does not exist");
+				throw new AccountNotFoundException("Cannot payee's account with id = " + account_id);
 			}
 			return null;
 		}
