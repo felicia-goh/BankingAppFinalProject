@@ -1,7 +1,5 @@
 package com.softra.banking;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;

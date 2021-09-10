@@ -35,7 +35,12 @@ public class AccountService implements IService<Account> {
 	@Override
 	public Account findById(int id) {
 		
-		return null;
+		System.out.println("inside findById of UserService");
+		if (dao.findById(id).isPresent()) {
+			return dao.findById(id).get();
+		} else {
+			return new Account();
+		}
 	}
 
 	@Override

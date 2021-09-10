@@ -9,28 +9,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class PayeeResource {
 	
 	@Autowired
-	@Qualifier("account") //jpa
+	@Qualifier("payee") //jpa
 	private IService<Payee> service;
 	@Autowired
-	@Qualifier("user")
-	private IService<Account> uservice;
+	@Qualifier("account")
+	private IService<Account> accountService;
 	
 	public PayeeResource() {
 	}
 	
-	@PostMapping(path = "/users/{user_id}/payees/new")
-	public Payee save(@PathVariable(value = "user_id") int user_id, @RequestBody Payee payee) {
+	@PostMapping(path = "/accounts/{account_id}/payees/new")
+	public Payee save(@PathVariable(value = "account_id") int account_id, @RequestBody Payee payee) {
 		
-
-			Account u = uservice.findById(user_id);
-
-			if (u.getId() != 0) {
-				payee.setAccount(u);
-				Payee p = service.save(payee);
-				return p;
-			} else {
-				System.out.println("Cannot find Account with id = " + user_id);
-				return null;
+		Account acc = accountService.findById(account_id);
+		Account payeeAcc = accountService.findById(payee.getPayee_account_id());
+		
+		if (acc.getId() != 0 && payeeAcc.getId() != 0) {
+			payee.setAccount(acc);
+			Payee p = service.save(payee);
+			return p;
+			
+		} else {
+			if (acc.getId() == 0) {
+				System.out.println("Cannot find Account with id = " + account_id);
+			} else if (payeeAcc.getId() == 0) {
+				System.out.println("Cannot find Account with id = " + account_id + ", payee's account does not exist");
 			}
+			return null;
 		}
+	}
+	
 }
