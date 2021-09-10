@@ -15,6 +15,7 @@ public class PayeeResource {
 	@Autowired
 	@Qualifier("payee") //jpa
 	private IService<Payee> service;
+	
 	@Autowired
 	@Qualifier("account")
 	private IService<Account> accountService;

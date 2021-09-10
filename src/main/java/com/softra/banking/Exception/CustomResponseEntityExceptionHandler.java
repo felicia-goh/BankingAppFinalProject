@@ -24,9 +24,21 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 	}
 	
 	@ExceptionHandler(AccountNotFoundException.class)
-	public final ResponseEntity<Object> handleUserNotFoundException(AccountNotFoundException ex, WebRequest req) {
+	public final ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException ex, WebRequest req) {
+		CustomExceptionResponse cer = new CustomExceptionResponse(new Date(), "User not found", ex.getMessage());
+		return new ResponseEntity(cer,HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(AccountNotFoundException.class)
+	public final ResponseEntity<Object> handleAccountNotFoundException(AccountNotFoundException ex, WebRequest req) {
 		CustomExceptionResponse cer = new CustomExceptionResponse(new Date(), "Account not found", ex.getMessage());
 		return new ResponseEntity(cer,HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(AccountLockedException.class)
+	public final ResponseEntity<Object> handleAccountLockedException(AccountLockedException ex, WebRequest req) {
+		CustomExceptionResponse cer = new CustomExceptionResponse(new Date(), "Account locked", ex.getMessage());
+		return new ResponseEntity(cer,HttpStatus.FORBIDDEN);
 	}
 
 	@Override
