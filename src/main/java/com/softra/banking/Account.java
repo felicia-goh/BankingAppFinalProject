@@ -1,6 +1,6 @@
 package com.softra.banking;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -15,10 +15,10 @@ public class Account {
 
 	@Id // jpa
 	@GeneratedValue(strategy = GenerationType.AUTO) // jpa
-	private int account_id;
+	private int id;
 	private String account_type;
-	private float balance; 
-	private Date open_date = new Date();
+	private float balance;
+	private LocalDateTime open_date = LocalDateTime.now();
 	@ManyToOne
 	@JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_user_account_id"))
 	private User user;
@@ -30,17 +30,17 @@ public class Account {
 	public Account(int id, String account_type, float balance, int user_id) {
 		System.out.println("Inside parameterized constructor of Account");
 
-		this.account_id = id;
+		this.id = id;
 		this.account_type = account_type;
 		this.balance = balance;
 	}
 
 	public int getId() {
-		return account_id;
+		return id;
 	}
 
 	public void setId(int id) {
-		this.account_id = id;
+		this.id = id;
 	}
 
 	public String getAccount_type() {
@@ -59,11 +59,11 @@ public class Account {
 		this.balance = balance;
 	}
 
-	public Date getOpen_date() {
+	public LocalDateTime getOpen_date() {
 		return open_date;
 	}
 
-	public void setOpen_date(Date open_date) {
+	public void setOpen_date(LocalDateTime open_date) {
 		this.open_date = open_date;
 	}
 
@@ -77,7 +77,7 @@ public class Account {
 
 	@Override
 	public String toString() {
-		return "Account [account_id=" + account_id + ", account_type=" + account_type + ", balance=" + balance
+		return "Account [id=" + id + ", account_type=" + account_type + ", balance=" + balance
 				+ ", open_date=" + open_date + ", user=" + user + "]";
 	}
 

@@ -45,7 +45,7 @@ public class UserResource {
 		return user;
 	}
 	
-	@PostMapping(path = "/users")
+	@PostMapping(path = "/users/new")
 	public User createUser (@Valid @RequestBody User user) {
 		System.out.println("inside createUser" + user);
 		return service.save(user);

@@ -11,19 +11,39 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController 																// return type will be in json format
+import com.softra.banking.Exception.UserNotFoundException;
+
+@RestController 				
 @CrossOrigin("*")
 public class AccountResource {
 	
 	@Autowired
 	@Qualifier("account") //jpa
-	private IService<Account> service;
+	private IService<Account> aservice;
 	@Autowired
 	@Qualifier("user")
 	private IService<User> uservice;
 	
 	public AccountResource() {
 		System.out.println("Inside default constructor of AccountResource");
+	}
+	
+	@GetMapping(path = "/accounts")
+	public List<Account> retrieveAllAccounts() {
+		
+		System.out.println("Inside retrieveAllAccounts of AccountResource");
+		
+		return aservice.findAll();
+	}
+	
+	@GetMapping(path = "accounts/{account_id}")
+	public Account retrieveAccount(@PathVariable(value = "account_id") int account_id) {
+		System.out.println("Inside retrieveAccount of AccountResource");
+		Account account = aservice.findById(account_id);
+		if (account== null) {
+			throw new UserNotFoundException("Account with id " + account_id + " not found");
+		}
+		return account;
 	}
 	
 	@PostMapping(path = "/users/{user_id}/accounts/new")
@@ -37,13 +57,12 @@ public class AccountResource {
 			System.out.println("You must have a minimum of $100 to open an account with us");
 			return null;			
 		} else {
-			System.out.println("inside test");
 			User u = uservice.findById(user_id);
 			System.out.println(u.getId());
 
 			if (u.getId() != 0) {
 				account.setUser(u);
-				Account acc = service.save(account);
+				Account acc = aservice.save(account);
 				return acc;
 			} else {
 				System.out.println("Cannot find User with id = " + user_id);
@@ -52,12 +71,11 @@ public class AccountResource {
 		}
 	}
 	
-	
-	@GetMapping(path = "/accounts")
-	public List<Account> findAll() {
+	@GetMapping(path = "/users/{user_id}/accounts")
+	public List<Account> retrieveAllAccountsByUserId(@PathVariable(value = "user_id") int user_id) {
 		
-		System.out.println("Inside retrieveAllAccounts of AccountResource");
+		System.out.println("Inside retrieveAllAccountsByUserId of AccountResource");
 		
-		return service.findAll();
+		return aservice.findByUserId(user_id);
 	}
 }

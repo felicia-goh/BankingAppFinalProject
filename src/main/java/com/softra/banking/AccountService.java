@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 public class AccountService implements IService<Account> {
 	
 	@Autowired
-//	@Qualifier("AccountJdbcTemplateDao")
 	@Qualifier("accountJPA") //jpa
 	private IDao<Account> dao;
 
@@ -34,8 +33,12 @@ public class AccountService implements IService<Account> {
 
 	@Override
 	public Account findById(int id) {
-		
-		return null;
+		System.out.println("Inside findById of AccountService");
+		if (dao.findById(id).isPresent()) {
+			return dao.findById(id).get();
+		} else {
+			return null;
+		}
 	}
 
 	@Override
@@ -43,5 +46,19 @@ public class AccountService implements IService<Account> {
 		
 		return null;
 	}
+
+	@Override
+	public List<Account> findByUserId(int id) {
+		System.out.println("Inside findByUserId of AccountService");
+		
+		return dao.findByUserId(id);
+	}
+
+	@Override
+	public List<Account> findByAccId(int id) {
+		
+		return null;
+	}
+
 
 }
