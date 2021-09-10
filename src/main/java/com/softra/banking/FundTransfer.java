@@ -23,6 +23,10 @@ public class FundTransfer {
 	@JoinColumn(name = "account_id", foreignKey = @ForeignKey(name = "fk_account_fund_transfer_id"))
 	private Account account;
 	
+	public FundTransfer() {
+		super();
+	}
+	
 	public FundTransfer(int payee_id, double amount) {
 		super();
 		this.payee_id = payee_id;

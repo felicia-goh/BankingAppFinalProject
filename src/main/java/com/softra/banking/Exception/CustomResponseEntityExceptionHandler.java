@@ -40,6 +40,12 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 		CustomExceptionResponse cer = new CustomExceptionResponse(new Date(), "Account locked", ex.getMessage());
 		return new ResponseEntity(cer,HttpStatus.FORBIDDEN);
 	}
+	
+	@ExceptionHandler(AccountNotFoundException.class)
+	public final ResponseEntity<Object> handlePayeeNotFoundException(PayeeNotFoundException ex, WebRequest req) {
+		CustomExceptionResponse cer = new CustomExceptionResponse(new Date(), "Payee not found", ex.getMessage());
+		return new ResponseEntity(cer,HttpStatus.NOT_FOUND);
+	}
 
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,

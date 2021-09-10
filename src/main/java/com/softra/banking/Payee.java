@@ -30,6 +30,11 @@ public class Payee {
 		this.nickname = nickname;
 	}
 	
+	
+	public int getPayee_id() {
+		return payee_id;
+	}
+
 	public int getPayee_account_id() {
 		return payee_account_id;
 	}
