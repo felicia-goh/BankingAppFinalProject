@@ -1,10 +1,16 @@
 package com.softra.banking;
 
 import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+
+
 
 
 @Entity(name="service_tracker")
@@ -16,7 +22,9 @@ public class ServiceRequest {
 	
 	private String description;
 	
-	private int acctId;
+	@OneToOne
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
+	private Account account;
 
 	private Date raisedDate;
 	
@@ -42,12 +50,12 @@ public class ServiceRequest {
 		this.description = description;
 	}
 
-	public int getAcctId() {
-		return acctId;
+	public Account getAccount() {
+		return account;
 	}
 
-	public void setAcctId(int acctId) {
-		this.acctId = acctId;
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
 	public Date getRaisedDate() {
@@ -65,34 +73,19 @@ public class ServiceRequest {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-	public ServiceRequest(int id, String description, int acctId, Date raisedDate, String status) {
-		super();
-		this.id = id;
-		this.description = description;
-		this.acctId = acctId;
-		this.raisedDate = raisedDate;
-		this.status = status;
-	}
 	
+	
+	// For jdbc template
 	public ServiceRequest(int id) {
 		this.id = id;
 	}
-	
-	public ServiceRequest(String description, int acctId, Date raisedDate, String status) {
 
-		this.description = description;
-		this.acctId = acctId;
-		this.raisedDate = raisedDate;
-		this.status = status;
-	}
-
-		
 	@Override
 	public String toString() {
-		return "ServiceRequest [id=" + id + ", description=" + description + ", acctId=" + acctId + ", raisedDate="
+		return "ServiceRequest [id=" + id + ", description=" + description + ", account=" + account + ", raisedDate="
 				+ raisedDate + ", status=" + status + "]";
 	}
 	
+
 
 }

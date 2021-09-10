@@ -19,10 +19,11 @@ public class ServiceJdbcTemplateDao implements IDao<ServiceRequest> {
 
 	@Override
 	public Optional<ServiceRequest> findById(int id) {
-		String sql = "select * from service_tracker where service_id = ?";
-		ServiceRequest request = template.queryForObject(sql, new ServiceRowMapper(), id);
-		Optional<ServiceRequest> opt = Optional.ofNullable(request);
-		return opt;
+//		String sql = "select * from service_tracker where service_id = ?";
+//		ServiceRequest request = template.queryForObject(sql, new ServiceRowMapper(), id);
+//		Optional<ServiceRequest> opt = Optional.ofNullable(request);
+//		return opt;
+		return null;
 	}
 
 	@Override
@@ -46,7 +47,7 @@ public class ServiceJdbcTemplateDao implements IDao<ServiceRequest> {
 		template.update(con -> {
 			PreparedStatement ps = con.prepareStatement(sql, new String[] { "id" });
 			ps.setString(1, request.getDescription());
-			ps.setInt(2, request.getAcctId());
+//			ps.setInt(2, request.getAcctId());
 			ps.setDate(3, new java.sql.Date(request.getRaisedDate().getTime()));
 			ps.setString(4, request.getStatus());
 			return ps;

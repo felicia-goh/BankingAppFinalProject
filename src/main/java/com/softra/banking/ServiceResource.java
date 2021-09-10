@@ -24,8 +24,8 @@ public class ServiceResource  {
   @PostMapping("/services/new")
   public int createServiceRequest(@RequestBody ServiceRequest request) {
 	  System.out.println("ServiceResource.createServiceRequest()");
-	ServiceRequest returnRequest = service.save(request);
-    return returnRequest.getId();
+	 
+	  return service.save(request).getId();
   }
   
   // return status of the service request

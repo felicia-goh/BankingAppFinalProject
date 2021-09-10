@@ -10,11 +10,17 @@ import org.springframework.stereotype.Service;
 public class ServiceService implements IService<ServiceRequest> {
 
 	@Autowired
-	@Qualifier("dbJdbcTemplate")
+	@Qualifier("serviceJPA")
 	private IDao<ServiceRequest> dao;
 
 	public ServiceService() {
 		System.out.println("ServiceService.ServiceService()");
+	}
+	
+	@Override
+	public ServiceRequest save(ServiceRequest request) {
+		System.out.println("ServiceService.save()");
+		return dao.save(request);
 	}
 
 	@Override
@@ -25,13 +31,7 @@ public class ServiceService implements IService<ServiceRequest> {
 		return request.isPresent() ? dao.findById(id).get() : null;
 	}
 
-	@Override
-	public ServiceRequest save(ServiceRequest request) {
-		System.out.println("ServiceService.save()");
-		return dao.save(request);
-	}
 
-	
 	@Override
 	public List<ServiceRequest> findAll() {
 		// no definition
