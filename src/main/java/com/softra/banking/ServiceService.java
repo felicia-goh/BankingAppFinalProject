@@ -44,4 +44,16 @@ public class ServiceService implements IService<ServiceRequest> {
 		return null;
 	}
 
+	@Override
+	public List<ServiceRequest> findByUserId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ServiceRequest> findByAccId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
