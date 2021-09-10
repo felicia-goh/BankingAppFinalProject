@@ -3,19 +3,16 @@ package com.softra.banking;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.Query;
+
 public interface IDao<T> {
-	
-//	public List<Customer> findAll();
-//	public Optional<Customer> findById(int id);
-//	public Customer save(Customer user);
-//	public Customer deleteById(int id);
-//	public List<Customer> findByIdOrName(int id, String name);
 	
 	public List<T> findAll();
 	public Optional<T> findById(int id);
 	public T save(T entity);
 	public T deleteById(int id);
-	
-	//// from louis
-
+	@Query("from accounts where user_id = :id")
+	public List<T> findByUserId(int id);
+	@Query("from transactions where account_id = :id")
+	public List<T> findByAccId(int id);
 }

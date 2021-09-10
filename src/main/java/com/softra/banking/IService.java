@@ -1,26 +1,17 @@
 package com.softra.banking;
 
-import java.io.Serializable;
 import java.util.List;
 
-
-//public interface IService {
-//	
-//	public List<User> findAll();
-//	public User findById(int id);
-//	public User save(User user);
-//	public User deleteById(int id);
-//
-//
-//}
+import org.springframework.data.jpa.repository.Query;
 
 public interface IService<T> {
 
-   public T findById(int id);
-
-   public List<T> findAll();
-
-   public T save(T entity);
-
-   public T deleteById(int id);
+	public T findById(int id);
+	public List<T> findAll();
+	public T save(T entity);
+	public T deleteById(int id);
+	@Query("from accounts where user_id = :id")
+	public List<T> findByUserId(int id);
+	@Query("from transactions where account_id = :id")
+	public List<T> findByAccId(int id);
 }
