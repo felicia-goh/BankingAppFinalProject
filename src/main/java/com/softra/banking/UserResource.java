@@ -57,9 +57,8 @@ public class UserResource {
 		return service.deleteById(id);
 	}
 	
-	// doesnt work yet
 	@PatchMapping("/users/{id}")
-	public User updateUserPartially(@PathVariable int id, @RequestBody User u) {
+	public User updateUser(@PathVariable int id, @RequestBody User u) {
 		User user = retrieveUser(id);
 		// assume that the update information form will show the existing user's information
 		// otherwise will need to test if the field are null in order to not overwrite existing info
@@ -70,7 +69,7 @@ public class UserResource {
 		user.setLogin_password(u.getLogin_password());
 		user.setSecret_question(u.getSecret_question());
 		user.setTransaction_password(u.getTransaction_password());
-		return user;
+		return service.save(user);
 	}
 	
 }
