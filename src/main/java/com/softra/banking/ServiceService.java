@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-@Service("service")
+@Service("serviceRequest")
 public class ServiceService implements IService<ServiceRequest> {
 
 	@Autowired
-	@Qualifier("dbJdbcTemplate")
+	@Qualifier("serviceJPA")
 	private IDao<ServiceRequest> dao;
 
 	public ServiceService() {

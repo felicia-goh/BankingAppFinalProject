@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class ServiceResource  {
   
   @Autowired
-  @Qualifier("service")
+  @Qualifier("serviceRequest")
   private IService<ServiceRequest> service;
+  
+  @Autowired
+  @Qualifier("account")
+  private IService<Account> accountService;
   
   public ServiceResource() {
     System.out.println("ServiceResource.ServiceResource()");
@@ -21,19 +25,26 @@ public class ServiceResource  {
   
   
   // displays service request number
-  @PostMapping("/services/new")
-  public int createServiceRequest(@RequestBody ServiceRequest request) {
+  @PostMapping("accounts/{account_id}/services/new")
+  public ServiceRequest createServiceRequest(@PathVariable("account_id") int account_id, @RequestBody ServiceRequest request) {
 	  System.out.println("ServiceResource.createServiceRequest()");
-	ServiceRequest returnRequest = service.save(request);
-    return returnRequest.getId();
+	  Account account = accountService.findById(account_id);
+	  if (account.getId() != 0) {
+		  request.setAccount(account);
+		  ServiceRequest returnRequest = service.save(request);	  
+		  return returnRequest;
+	  } else {
+		  return null;
+	  }
+	  
   }
   
   // return status of the service request
-  @GetMapping("/users/{request_id}/services")
-  public String retrieveServiceRequest(@PathVariable("request_id") int id) {
+  @GetMapping("/accounts/{account_id}/services/{service_id}")
+  public String retrieveServiceRequest(@PathVariable("account_id") int account_id, @PathVariable("service_id") int service_id) {
 	  System.out.println("ServiceResource.retrieveServiceRequest()");
 	  
-	  ServiceRequest request = service.findById(id);
+	  ServiceRequest request = service.findById(service_id);
 	  return request == null ? null : request.getStatus();
 
   }

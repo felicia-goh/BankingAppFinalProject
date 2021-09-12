@@ -13,6 +13,8 @@ public class TransactionService implements IService<Transaction> {
 	@Qualifier("transactionJPA")
 	private IDao<Transaction> dao;
 	
+	private CustomDao cdao;
+	
 	public TransactionService() {
 		System.out.println("Inside default constructor of TransactionService");
 	}
@@ -52,7 +54,7 @@ public class TransactionService implements IService<Transaction> {
 		
 		System.out.println("Inside findByUserAccId of TransactionService");
 		
-		return dao.findByAccId(accId);
+		return cdao.findByAccId(accId);
 	}
 
 }

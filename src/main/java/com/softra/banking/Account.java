@@ -13,8 +13,8 @@ import javax.persistence.ManyToOne;
 @Entity(name = "accounts") // jpa
 public class Account {
 
-	@Id // jpa
-	@GeneratedValue(strategy = GenerationType.AUTO) // jpa
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String account_type;
 	private float balance;
