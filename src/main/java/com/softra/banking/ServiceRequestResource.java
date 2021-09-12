@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class ServiceResource  {
+public class ServiceRequestResource  {
   
   @Autowired
   @Qualifier("serviceRequest")
@@ -19,7 +19,7 @@ public class ServiceResource  {
   @Qualifier("account")
   private IService<Account> accountService;
   
-  public ServiceResource() {
+  public ServiceRequestResource() {
     System.out.println("ServiceResource.ServiceResource()");
   }
   

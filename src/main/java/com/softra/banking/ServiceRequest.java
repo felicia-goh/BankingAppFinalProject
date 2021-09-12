@@ -10,7 +10,7 @@ import javax.persistence.ForeignKey;
 import javax.persistence.ManyToOne;
 
 
-@Entity(name="service_tracker")
+@Entity(name="service_requests")
 public class ServiceRequest {
 		
 	@Id
@@ -20,7 +20,7 @@ public class ServiceRequest {
 	private String description;
 	
 	@ManyToOne
-	@JoinColumn(name = "account_id", foreignKey = @ForeignKey(name = "fk_account_service_id"))
+	@JoinColumn(name = "account_id", foreignKey = @ForeignKey(name = "fk_account_service_request_id"))
 	private Account account;
 
 	private LocalDateTime raisedDate = LocalDateTime.now();

@@ -12,8 +12,6 @@ public class AccountService implements IService<Account> {
 	@Autowired
 	@Qualifier("accountJPA") //jpa
 	private IDao<Account> dao;
-	
-	private CustomDao cdao;
 
 	public AccountService() {
 		System.out.println("Inside default constructor of AccountService");
@@ -48,19 +46,18 @@ public class AccountService implements IService<Account> {
 		
 		return null;
 	}
-
+	
 	@Override
 	public List<Account> findByUserId(int id) {
 		System.out.println("Inside findByUserId of AccountService");
 		
-		return cdao.findByUserId(id);
+		return dao.findByUserId(id);
 	}
 
 	@Override
 	public List<Account> findByAccId(int id) {
-		
+		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 }

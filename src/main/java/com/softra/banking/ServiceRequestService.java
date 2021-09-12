@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service("serviceRequest")
-public class ServiceService implements IService<ServiceRequest> {
+public class ServiceRequestService implements IService<ServiceRequest> {
 
 	@Autowired
 	@Qualifier("serviceJPA")
 	private IDao<ServiceRequest> dao;
 
-	public ServiceService() {
+	public ServiceRequestService() {
 		System.out.println("ServiceService.ServiceService()");
 	}
 
