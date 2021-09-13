@@ -2,6 +2,7 @@ package com.softra.banking;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +13,7 @@ import com.softra.banking.Exception.InsufficientFundsException;
 import com.softra.banking.Exception.PayeeNotFoundException;
 
 @RestController
+@CrossOrigin("*")
 public class FundTransferResource {
 	
 	@Autowired
