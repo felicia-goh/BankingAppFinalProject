@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 // meta-annotation: similar to @Component but more specific
@@ -13,9 +12,6 @@ public class UserService implements IService<User> {
 	
 	@Autowired
 	@Qualifier("userJPA")
-//	@Qualifier("jdbcTemplateDao") // go to http://localhost:7000/h2-console
-//	@Qualifier("jdbcApiDao")
-//	@Qualifier("inmemory")
 	private IDao<User> dao;
 	
 	public UserService() {
@@ -48,5 +44,17 @@ public class UserService implements IService<User> {
 	public User deleteById(int id) {
 		System.out.println("inside deleteById of UserService");
 		return dao.deleteById(id);
+	}
+
+	@Override
+	public List<User> findByUserId(int id) {
+		
+		return null;
+	}
+
+	@Override
+	public List<User> findByAccId(int id) {
+		
+		return null;
 	}
 }

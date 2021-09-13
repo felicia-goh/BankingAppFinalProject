@@ -14,7 +14,7 @@ import com.softra.banking.Exception.PayeeNotFoundException;
 public class FundTransferResource {
 	
 	@Autowired
-	@Qualifier("fundTransfer") //jpa
+	@Qualifier("fundTransfer")
 	private IService<FundTransfer> service;
 	
 	@Autowired
