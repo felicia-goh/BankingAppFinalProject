@@ -1,16 +1,14 @@
 package com.softra.banking;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
 // creates table called users
-@Entity(name="users")
+@Entity(name = "users")
 public class User {
-	
+
 	@Id // primary key
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -21,13 +19,13 @@ public class User {
 	private String login_password;
 	private String secret_question;
 	private String transaction_password;
-	private boolean lock_status;
-	
-	
+	private boolean lock_status = false;
+	private boolean isAdmin = false;
+
 	public User() {
 		super();
 	}
-	
+
 	public User(int id, String login_password) {
 		super();
 		this.id = id;
@@ -40,8 +38,9 @@ public class User {
 		this.secret_question = secret_question;
 		this.transaction_password = transaction_password;
 		this.lock_status = false;
+		this.isAdmin = false;
 	}
-	
+
 	public User(String customer_name, String email, String address, String pancard, String login_password,
 			String secret_question, String transaction_password) {
 		super();
@@ -99,47 +98,48 @@ public class User {
 		return login_password;
 	}
 
-
 	public void setLogin_password(String login_password) {
 		this.login_password = login_password;
 	}
-
 
 	public String getSecret_question() {
 		return secret_question;
 	}
 
-
 	public void setSecret_question(String secret_question) {
 		this.secret_question = secret_question;
 	}
-
 
 	public String getTransaction_password() {
 		return transaction_password;
 	}
 
-
 	public void setTransaction_password(String transaction_password) {
 		this.transaction_password = transaction_password;
 	}
-
 
 	public boolean isLock_status() {
 		return lock_status;
 	}
 
-
 	public void setLock_status(boolean lock_status) {
 		this.lock_status = lock_status;
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", customer_name=" + customer_name + ", email=" + email + ", address=" + address
 				+ ", pancard=" + pancard + ", login_password=" + login_password + ", secret_question=" + secret_question
-				+ ", transaction_password=" + transaction_password + ", lock_status=" + lock_status + "]";
+				+ ", transaction_password=" + transaction_password + ", lock_status=" + lock_status + ", isAdmin="
+				+ isAdmin + "]";
 	}
-	
-	
+
 }
