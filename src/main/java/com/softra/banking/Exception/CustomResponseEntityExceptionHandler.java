@@ -46,6 +46,13 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 		CustomExceptionResponse cer = new CustomExceptionResponse(new Date(), "Payee not found", ex.getMessage());
 		return new ResponseEntity(cer,HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler(InsufficientFundsException.class)
+	public final ResponseEntity<Object> handleInsufficientFundsException(InsufficientFundsException ex, WebRequest req) {
+		CustomExceptionResponse cer = new CustomExceptionResponse(new Date(), "Insufficient funds", ex.getMessage());
+		return new ResponseEntity(cer,HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
 
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
