@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 public interface UserJpaRepository extends IDao<User>, JpaRepository<User, Integer> {
 	// Spring Data JPA
 	// JpaRepository<Data type of Entity, datatype of Primary key>
-	
+	User findByEmail(String email);
 }
