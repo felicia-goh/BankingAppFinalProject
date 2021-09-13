@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.softra.banking.Exception.AccountNotFoundException;
+
 @RestController
 public class ServiceRequestResource  {
   
@@ -26,7 +28,7 @@ public class ServiceRequestResource  {
   
   // displays service request number
   @PostMapping("accounts/{account_id}/services/new")
-  public ServiceRequest createServiceRequest(@PathVariable("account_id") int account_id, @RequestBody ServiceRequest request) {
+  public ServiceRequest createServiceRequest(@PathVariable("account_id") int account_id, @RequestBody ServiceRequest request) throws AccountNotFoundException {
 	  System.out.println("ServiceResource.createServiceRequest()");
 	  Account account = accountService.findById(account_id);
 	  if (account.getId() != 0) {
@@ -34,7 +36,7 @@ public class ServiceRequestResource  {
 		  ServiceRequest returnRequest = service.save(request);	  
 		  return returnRequest;
 	  } else {
-		  return null;
+		  throw new AccountNotFoundException("Account with id " + account_id + " not found");
 	  }
 	  
   }
