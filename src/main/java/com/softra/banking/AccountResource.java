@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.softra.banking.Exception.AccountNotFoundException;
+import com.softra.banking.Exception.InsufficientFundsException;
 import com.softra.banking.Exception.UserNotFoundException;
 
 @RestController 				
@@ -37,25 +39,24 @@ public class AccountResource {
 	}
 	
 	@GetMapping(path = "accounts/{account_id}")
-	public Account retrieveAccount(@PathVariable(value = "account_id") int account_id) {
+	public Account retrieveAccount(@PathVariable(value = "account_id") int account_id) throws AccountNotFoundException {
 		System.out.println("Inside retrieveAccount of AccountResource");
 		Account account = aservice.findById(account_id);
 		if (account== null) {
-			throw new UserNotFoundException("Account with id " + account_id + " not found");
+			throw new AccountNotFoundException("Account with id " + account_id + " not found");
 		}
 		return account;
 	}
 	
 	@PostMapping(path = "/users/{user_id}/accounts/new")
-	public Account save(@PathVariable(value = "user_id") int user_id, @RequestBody Account account) {
+	public Account save(@PathVariable(value = "user_id") int user_id, @RequestBody Account account) throws InsufficientFundsException {
 		
 		System.out.println("Inside createAccount of AccountResource " + user_id);
 		
-		float balance = account.getBalance();
+		double balance = account.getBalance();
 		
 		if(balance < 100) {
-			System.out.println("You must have a minimum of $100 to open an account with us");
-			return null;			
+			throw new InsufficientFundsException("You must have a minimum of $100 to open an account with us");		
 		} else {
 			User u = uservice.findById(user_id);
 			System.out.println(u.getId());
@@ -65,8 +66,7 @@ public class AccountResource {
 				Account acc = aservice.save(account);
 				return acc;
 			} else {
-				System.out.println("Cannot find User with id = " + user_id);
-				return null;
+				throw new UserNotFoundException("Cannot find User with id = " + user_id);
 			}
 		}
 	}

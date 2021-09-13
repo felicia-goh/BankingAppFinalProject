@@ -33,11 +33,11 @@ public class AccountService implements IService<Account> {
 
 	@Override
 	public Account findById(int id) {
-		System.out.println("Inside findById of AccountService");
+		System.out.println("inside findById of AccountService");
 		if (dao.findById(id).isPresent()) {
 			return dao.findById(id).get();
 		} else {
-			return null;
+			return new Account();
 		}
 	}
 

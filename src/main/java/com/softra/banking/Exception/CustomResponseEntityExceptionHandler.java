@@ -23,11 +23,36 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 		return new ResponseEntity(cer,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@ExceptionHandler(CustomerNotFoundException.class)
-	public final ResponseEntity<Object> handleUserNotFoundException(CustomerNotFoundException ex, WebRequest req) {
+	@ExceptionHandler(UserNotFoundException.class)
+	public final ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException ex, WebRequest req) {
 		CustomExceptionResponse cer = new CustomExceptionResponse(new Date(), "User not found", ex.getMessage());
 		return new ResponseEntity(cer,HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler(AccountNotFoundException.class)
+	public final ResponseEntity<Object> handleAccountNotFoundException(AccountNotFoundException ex, WebRequest req) {
+		CustomExceptionResponse cer = new CustomExceptionResponse(new Date(), "Account not found", ex.getMessage());
+		return new ResponseEntity(cer,HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(AccountLockedException.class)
+	public final ResponseEntity<Object> handleAccountLockedException(AccountLockedException ex, WebRequest req) {
+		CustomExceptionResponse cer = new CustomExceptionResponse(new Date(), "Account locked", ex.getMessage());
+		return new ResponseEntity(cer,HttpStatus.FORBIDDEN);
+	}
+	
+	@ExceptionHandler(PayeeNotFoundException.class)
+	public final ResponseEntity<Object> handlePayeeNotFoundException(PayeeNotFoundException ex, WebRequest req) {
+		CustomExceptionResponse cer = new CustomExceptionResponse(new Date(), "Payee not found", ex.getMessage());
+		return new ResponseEntity(cer,HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(InsufficientFundsException.class)
+	public final ResponseEntity<Object> handleInsufficientFundsException(InsufficientFundsException ex, WebRequest req) {
+		CustomExceptionResponse cer = new CustomExceptionResponse(new Date(), "Insufficient funds", ex.getMessage());
+		return new ResponseEntity(cer,HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
 
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,

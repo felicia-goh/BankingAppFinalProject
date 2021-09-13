@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.softra.banking.Exception.AccountNotFoundException;
+import com.softra.banking.Exception.InsufficientFundsException;
+
 @RestController
 @CrossOrigin("*")
 public class TransactionResource {
@@ -43,7 +46,7 @@ public class TransactionResource {
 	}
 	
 	@PostMapping(path = "/accounts/{account_id}/transactions/new")
-	public Transaction save(@PathVariable(value = "account_id") int account_id, @RequestBody Transaction transaction) {
+	public Transaction save(@PathVariable(value = "account_id") int account_id, @RequestBody Transaction transaction) throws InsufficientFundsException, AccountNotFoundException {
 		
 		System.out.println("Inside createTransaction of TransactionResource");
 		
@@ -58,7 +61,7 @@ public class TransactionResource {
 			if(type.equals("withdraw")) {
 				System.out.println("Current account balance: " + a.getBalance());
 				if(amount > a.getBalance()) {
-					System.out.println("Insufficient funds to withdraw");
+					throw new InsufficientFundsException("Insufficient funds to withdraw");
 				} else {
 					System.out.println("Withdrawing...");
 					double balAfterWithdraw = a.getBalance() - amount;
@@ -72,11 +75,9 @@ public class TransactionResource {
 				a.setBalance((float)balAfterDeposit);
 				System.out.println("Balance after deposit: " + balAfterDeposit);
 				return tservice.save(transaction);
-			}
-			return null;			
+			}		
 		} else {
-			System.out.println("Cannot find Account with id = " + account_id);
-			return null;
+			throw new AccountNotFoundException("Cannot find Account with id = " + account_id);
 		}
 	}
 }

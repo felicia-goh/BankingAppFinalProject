@@ -51,7 +51,7 @@ public class TransactionService implements IService<Transaction> {
 	public List<Transaction> findByAccId( int accId) {
 		
 		System.out.println("Inside findByUserAccId of TransactionService");
-		List<Transaction> tlist = dao.findByAccId(accId);
+		List<Transaction> tlist = dao.findTransactionsByAccId(accId);
 		System.out.println(tlist);
 		return tlist;
 	}
