@@ -45,4 +45,16 @@ public class FundTransferService implements IService<FundTransfer>{
 		return dao.deleteById(id);
 	}
 
+	@Override
+	public List<FundTransfer> findByUserId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<FundTransfer> findByAccId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

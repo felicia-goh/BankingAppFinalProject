@@ -45,4 +45,16 @@ public class PayeeService implements IService<Payee>{
 		return dao.deleteById(id);
 	}
 
+	@Override
+	public List<Payee> findByUserId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Payee> findByAccId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
