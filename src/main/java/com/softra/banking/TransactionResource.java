@@ -55,7 +55,7 @@ public class TransactionResource {
 		
 		if(a.getId() != 0) {
 			transaction.setAccount(a);
-			if(transaction.getType().equals("withdraw")) {
+			if(type.equals("withdraw")) {
 				System.out.println("Current account balance: " + a.getBalance());
 				if(amount > a.getBalance()) {
 					System.out.println("Insufficient funds to withdraw");

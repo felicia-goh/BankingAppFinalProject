@@ -46,7 +46,7 @@ public class AccountService implements IService<Account> {
 		
 		return null;
 	}
-
+	
 	@Override
 	public List<Account> findByUserId(int id) {
 		System.out.println("Inside findByUserId of AccountService");
@@ -56,9 +56,8 @@ public class AccountService implements IService<Account> {
 
 	@Override
 	public List<Account> findByAccId(int id) {
-		
+		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 }
