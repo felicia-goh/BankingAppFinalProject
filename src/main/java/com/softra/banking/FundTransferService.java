@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class FundTransferService implements IService<FundTransfer>{
 	
 	@Autowired
-	@Qualifier("payeeJPA")
+	@Qualifier("fundTransferJPA")
 	private IDao<FundTransfer> dao;
 	
 	public FundTransferService() {

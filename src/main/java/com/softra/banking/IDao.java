@@ -15,6 +15,8 @@ public interface IDao<T> {
 	@Query("from accounts where user_id = :id")
 	public List<T> findByUserId(int id);
 	@Query("from transactions where account_id = :id")
-	public List<T> findByAccId(int id);
+	public List<T> findTransactionsByAccId(int id);
+	@Query("from payees where account_id = :id")
+	public List<T> findPayeesByAccId(int id);
 
 }

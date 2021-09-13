@@ -28,10 +28,9 @@ public class Transaction {
 		System.out.println("Inside default constructor of Transaction");
 	}
 
-	public Transaction(String description, LocalDateTime txn_datetime, String type, double amount, int account_id) {
+	public Transaction(String description, String type, double amount) {
 		System.out.println("Inside parameterized constructor of Transaction");
 		this.description = description;
-		this.txn_datetime = LocalDateTime.now();
 		this.type = type;
 		this.amount = amount;
 	}

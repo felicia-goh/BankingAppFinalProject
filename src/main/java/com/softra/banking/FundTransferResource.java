@@ -25,6 +25,10 @@ public class FundTransferResource {
 	@Qualifier("payee")
 	private IService<Payee> payeeService;
 	
+	@Autowired
+	@Qualifier("transaction")
+	private IService<Transaction> transactionService;
+	
 	public FundTransferResource() {
 	}
 	
@@ -33,9 +37,25 @@ public class FundTransferResource {
 		
 		Account acc = accountService.findById(account_id);
 		Payee payee = payeeService.findById(fundTransfer.getPayee_id());
+		Account payeeAcc = accountService.findById(payee.getPayee_account_id());
+		double amt = fundTransfer.getAmount();
 		
 		if (acc.getId() != 0 && payee.getPayee_id() != 0) {
 			fundTransfer.setAccount(acc);
+			
+			Transaction senderTxn = new Transaction("fund transfer", "withdraw", amt);
+			senderTxn.setAccount(acc);
+			acc.setBalance(acc.getBalance() - amt); // ideally this logic should be in transactions
+			Transaction senderTransaction = transactionService.save(senderTxn);
+			fundTransfer.setSender_transaction(senderTransaction);
+			
+			
+			Transaction payeeTxn = new Transaction("fund transfer", "deposit", amt);
+			payeeTxn.setAccount(payeeAcc);
+			payeeAcc.setBalance(payeeAcc.getBalance() + amt); // ideally this logic should be in transactions
+			Transaction payeeTransaction = transactionService.save(payeeTxn);
+			fundTransfer.setPayee_transaction(payeeTransaction);
+			
 			FundTransfer ft = service.save(fundTransfer);
 			return ft;
 			

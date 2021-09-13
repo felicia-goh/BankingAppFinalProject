@@ -17,7 +17,7 @@ public class Account {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String account_type;
-	private float balance;
+	private double balance;
 	private LocalDateTime open_date = LocalDateTime.now();
 	@ManyToOne
 	@JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_user_account_id"))
@@ -27,7 +27,7 @@ public class Account {
 		System.out.println("Inside default constructor of Account");
 	}
 
-	public Account(int id, String account_type, float balance, int user_id) {
+	public Account(int id, String account_type, double balance, int user_id) {
 		System.out.println("Inside parameterized constructor of Account");
 
 		this.id = id;
@@ -51,11 +51,11 @@ public class Account {
 		this.account_type = account_type;
 	}
 
-	public float getBalance() {
+	public double getBalance() {
 		return balance;
 	}
 
-	public void setBalance(float balance) {
+	public void setBalance(double balance) {
 		this.balance = balance;
 	}
 

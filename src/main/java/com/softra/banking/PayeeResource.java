@@ -1,7 +1,10 @@
 package com.softra.banking;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +24,13 @@ public class PayeeResource {
 	private IService<Account> accountService;
 	
 	public PayeeResource() {
+	}
+	
+	@GetMapping(path = "/accounts/{account_id}/payees")
+	public List<Payee> findAll(@PathVariable(value = "account_id") int account_id) throws AccountNotFoundException{
+		
+		return service.findByAccId(account_id);
+		
 	}
 	
 	@PostMapping(path = "/accounts/{account_id}/payees/new")

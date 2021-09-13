@@ -54,7 +54,7 @@ public class PayeeService implements IService<Payee>{
 	@Override
 	public List<Payee> findByAccId(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.findPayeesByAccId(id);
 	}
 
 }

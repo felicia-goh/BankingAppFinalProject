@@ -51,7 +51,7 @@ public class AccountResource {
 		
 		System.out.println("Inside createAccount of AccountResource " + user_id);
 		
-		float balance = account.getBalance();
+		double balance = account.getBalance();
 		
 		if(balance < 100) {
 			System.out.println("You must have a minimum of $100 to open an account with us");

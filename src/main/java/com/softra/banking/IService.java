@@ -11,8 +11,8 @@ public interface IService<T> {
 	public List<T> findAll();
 	public T save(T entity);
 	public T deleteById(int id);
-	@Query("from accounts where user_id = :id")
+//	@Query("from accounts where user_id = :id")
 	public List<T> findByUserId(int id);
-	@Query("from transactions where account_id = :id")
+//	@Query("from transactions where account_id = :id")
 	public List<T> findByAccId(int id);
 }

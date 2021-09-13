@@ -23,7 +23,7 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 		return new ResponseEntity(cer,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@ExceptionHandler(AccountNotFoundException.class)
+	@ExceptionHandler(UserNotFoundException.class)
 	public final ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException ex, WebRequest req) {
 		CustomExceptionResponse cer = new CustomExceptionResponse(new Date(), "User not found", ex.getMessage());
 		return new ResponseEntity(cer,HttpStatus.NOT_FOUND);
@@ -41,7 +41,7 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 		return new ResponseEntity(cer,HttpStatus.FORBIDDEN);
 	}
 	
-	@ExceptionHandler(AccountNotFoundException.class)
+	@ExceptionHandler(PayeeNotFoundException.class)
 	public final ResponseEntity<Object> handlePayeeNotFoundException(PayeeNotFoundException ex, WebRequest req) {
 		CustomExceptionResponse cer = new CustomExceptionResponse(new Date(), "Payee not found", ex.getMessage());
 		return new ResponseEntity(cer,HttpStatus.NOT_FOUND);
