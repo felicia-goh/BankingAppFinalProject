@@ -3,6 +3,7 @@ package com.softra.banking;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import com.softra.banking.Exception.UserNotFoundException;
 
 // return type will be in json
 @RestController
+@CrossOrigin("*")
 public class LoginResource {
 	
 	// FIELD injection --> don't need to create instances in order, unless it's CONSTRUCTOR/SETTER injection
