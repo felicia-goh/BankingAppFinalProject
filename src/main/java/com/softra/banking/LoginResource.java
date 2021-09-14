@@ -37,7 +37,7 @@ public class LoginResource {
 		
 		User user = null;
 		
-		if (fail_count >= 30) {
+		if (fail_count >= 3) {
 			user.setLock_status(true); 
 			throw new AccountLockedException("You have exceeded the number of login attempts. Please contact the bank to unlock your account.");
 		}
