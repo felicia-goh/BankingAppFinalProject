@@ -25,6 +25,12 @@ public class User {
 	public User() {
 		super();
 	}
+	
+	public User(String email, String login_password) {
+		super();
+		this.email = email;
+		this.login_password = login_password;
+	}
 
 	public User(int id, String login_password) {
 		super();
